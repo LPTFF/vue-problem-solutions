@@ -24,12 +24,10 @@
 进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？ 
 
 */
-const add = function (list, target) {
+const addLow = function (list, target) {
+    // 暴力循环,时间复杂度O(n2)
     for (let index = 0; index < list.length; index++) {
-        console.log(index);
         for (let indexOne = index + 1; indexOne < list.length; indexOne++) {
-            console.log(index, indexOne);
-            console.log(list[index], list[indexOne]);
             if (list[index] + list[indexOne] == target) {
                 return [index, indexOne];
             }
@@ -40,6 +38,25 @@ const add = function (list, target) {
 
 const num = [3, 3], target = 6;
 
-const result = add(num, target);
+const result = addLow(num, target);
 
 result;
+
+const addHight = function (list, target) {
+    // 利用map,时间复杂度O(n)
+    // eslint-disable-next-line no-undef
+    const map = new Map();
+    for (let index = 0; index < list.length; index++) {
+        if (map.has(target - list[index])) {
+            return [map.get(target - list[index]), index];
+        }
+        map.set(list[index], index);
+    }
+    return [' ', ''];
+};
+
+const numHigh = [3, 2, 4], targetHigh = 6;
+
+const resultHigh = addHight(numHigh, targetHigh);
+
+resultHigh;
